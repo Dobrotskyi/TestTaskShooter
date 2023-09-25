@@ -23,9 +23,11 @@ public class Gun : MonoBehaviour
     private IEnumerator Reloading()
     {
         IsReloading = true;
+        transform.localRotation = Quaternion.Euler(-90f, 0, 0);
         yield return new WaitForSeconds(_gunInfo.ReloadTime);
         IsReloading = false;
         AmmoInMag = _gunInfo.MagCapacity;
+        transform.localRotation = Quaternion.Euler(0, 0, 0);
     }
 
     public void Shoot()
