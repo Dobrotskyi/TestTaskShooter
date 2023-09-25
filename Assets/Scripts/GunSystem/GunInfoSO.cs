@@ -28,5 +28,4 @@ public class GunInfoSO : ScriptableObject
 
     public ParticleSystem EnemyHit => _enemyHit;
     public ParticleSystem Missed => _missed;
-
 }

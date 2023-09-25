@@ -15,7 +15,7 @@ MonoBehaviour:
   _availableFromStart: 1
   _name: Pistol
   _magCapacity: 7
-  _reloadTime: 0.3
+  _reloadTime: 1
   _fireRate: 0.5
   _damage: 25
   _spread: {x: 0, y: 0, z: 0}

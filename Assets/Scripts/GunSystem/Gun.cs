@@ -1,18 +1,36 @@
+using System.Collections;
 using UnityEngine;
 
 public class Gun : MonoBehaviour
 {
     public bool Available { private set; get; }
+    public bool IsReloading { private set; get; }
+
     public string Name { private set; get; }
+    public int AmmoInMag { private set; get; }
 
     [SerializeField] private GunInfoSO _gunInfo;
     [SerializeField] private Transform _shotPoint;
 
     private float _lastShotTime = 0;
 
+    public void StartReloading()
+    {
+        if (!IsReloading)
+            StartCoroutine(Reloading());
+    }
+
+    private IEnumerator Reloading()
+    {
+        IsReloading = true;
+        yield return new WaitForSeconds(_gunInfo.ReloadTime);
+        IsReloading = false;
+        AmmoInMag = _gunInfo.MagCapacity;
+    }
+
     public void Shoot()
     {
-        if (_lastShotTime + _gunInfo.FireRate > Time.time)
+        if (_lastShotTime + _gunInfo.FireRate > Time.time || AmmoInMag <= 0 || IsReloading)
             return;
 
         _lastShotTime = Time.time;
@@ -31,11 +49,24 @@ public class Gun : MonoBehaviour
             else
                 Instantiate(_gunInfo.Missed, raycastHit.point, hitEffectRotation);
         }
+        AmmoInMag--;
     }
 
     private void Awake()
     {
         Available = _gunInfo.AvailableFromStart;
         Name = _gunInfo.Name;
+        AmmoInMag = _gunInfo.MagCapacity;
+    }
+
+    private void OnDisable()
+    {
+        StopAllCoroutines();
+    }
+
+    private void OnEnable()
+    {
+        if (IsReloading)
+            StartCoroutine(Reloading());
     }
 }

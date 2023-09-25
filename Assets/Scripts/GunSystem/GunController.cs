@@ -19,6 +19,22 @@ public class GunController : MonoBehaviour
 
     private void Update()
     {
+        CheckReloading();
+        CheckIfChangeWeapon();
+        ShowSelectedWeaponIfAiming();
+    }
+
+    private void CheckReloading()
+    {
+        if (_input.startReloading)
+        {
+            _guns[_selectedWeaponIndex].StartReloading();
+            _input.startReloading = false;
+        }
+    }
+
+    private void CheckIfChangeWeapon()
+    {
         if (_input.selectedWeaponIndex != _selectedWeaponIndex)
         {
             if (!_guns[_input.selectedWeaponIndex].Available)
@@ -30,7 +46,10 @@ public class GunController : MonoBehaviour
                 _guns[_selectedWeaponIndex].gameObject.SetActive(true);
             }
         }
+    }
 
+    private void ShowSelectedWeaponIfAiming()
+    {
         if (_input.aim)
             if (_guns[_selectedWeaponIndex].gameObject.activeSelf == false)
                 _guns[_selectedWeaponIndex].gameObject.SetActive(true);

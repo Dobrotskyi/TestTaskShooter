@@ -14,6 +14,7 @@ namespace StarterAssets
         public bool sprint;
         public bool aim;
         public bool shoot;
+        public bool startReloading;
         public int selectedWeaponIndex;
 
         [Header("Movement Settings")]
@@ -40,6 +41,11 @@ namespace StarterAssets
         public void OnJump(InputValue value)
         {
             JumpInput(value.isPressed);
+        }
+
+        public void OnReload(InputValue value)
+        {
+            ReloadingInput(value.isPressed);
         }
 
         public void OnGetFirstWeapon(InputValue value)
@@ -87,6 +93,11 @@ namespace StarterAssets
         public void JumpInput(bool newJumpState)
         {
             jump = newJumpState;
+        }
+
+        public void ReloadingInput(bool newReloadingState)
+        {
+            startReloading = newReloadingState;
         }
 
         public void SprintInput(bool newSprintState)

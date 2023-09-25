@@ -2083,12 +2083,12 @@ PrefabInstance:
     - target: {fileID: 319807768202828523, guid: 9b5f4787448c61c4c808085d9ce97e73,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.235
+      value: 0.181
       objectReference: {fileID: 0}
     - target: {fileID: 319807768202828523, guid: 9b5f4787448c61c4c808085d9ce97e73,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.387
+      value: 1.479
       objectReference: {fileID: 0}
     - target: {fileID: 319807768202828523, guid: 9b5f4787448c61c4c808085d9ce97e73,
         type: 3}
@@ -2406,7 +2406,6 @@ MonoBehaviour:
     type: 3}
   _missedHitMarker: {fileID: 5417406507287504946, guid: 27e54b4bb7b91c74baf83b0557aa0af9,
     type: 3}
-  _gun: {fileID: 1300282710}
 --- !u!4 &6982812147933622149 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6472386052171829892, guid: 38066f4e6084a0a40841ab8c4b97b4fa,
