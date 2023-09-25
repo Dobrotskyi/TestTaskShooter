@@ -13,13 +13,15 @@ public class PlayerAiming : MonoBehaviour
     [SerializeField] private ParticleSystem _enemyHitMarker;
     [SerializeField] private ParticleSystem _missedHitMarker;
 
-    [SerializeField] private Gun _gun;
-
+    private GunController _gunController;
     private StarterAssetsInputs _inputs;
+    private Animator _animator;
 
     private void Awake()
     {
         _inputs = GetComponent<StarterAssetsInputs>();
+        _animator = GetComponent<Animator>();
+        _gunController = GetComponent<GunController>();
     }
 
     private void Update()
@@ -43,10 +45,15 @@ public class PlayerAiming : MonoBehaviour
             Vector3 aimDirection = (worldAimTarget - transform.position).normalized;
             transform.forward = Vector3.Lerp(transform.forward, aimDirection, 20f * Time.deltaTime);
 
+            _animator.SetLayerWeight(1, Mathf.Lerp(_animator.GetLayerWeight(1), 1f, Time.deltaTime * 10f));
+
             if (_inputs.shoot)
-                _gun.Shoot();
+                _gunController.SelectedGun.Shoot();
         }
         else
+        {
             _viewToggle.EnableThirdPersonView();
+            _animator.SetLayerWeight(1, Mathf.Lerp(_animator.GetLayerWeight(1), 0f, Time.deltaTime * 10f));
+        }
     }
 }

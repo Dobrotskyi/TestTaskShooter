@@ -3,7 +3,8 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "GunInfo", menuName = "Guns/Gun info", order = 2)]
 public class GunInfoSO : ScriptableObject
 {
-    [SerializeField] private GunTypes _type;
+    [SerializeField] private bool _availableFromStart;
+
     [SerializeField] private string _name;
     [SerializeField] private int _magCapacity;
     [SerializeField] private float _reloadTime;
@@ -16,6 +17,7 @@ public class GunInfoSO : ScriptableObject
     [SerializeField] private ParticleSystem _enemyHit;
     [SerializeField] private ParticleSystem _missed;
 
+    public bool AvailableFromStart => _availableFromStart;
     public string Name => _name;
     public int MagCapacity => _magCapacity;
     public float ReloadTime => _reloadTime;

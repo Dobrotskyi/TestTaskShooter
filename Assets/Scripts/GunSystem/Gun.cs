@@ -1,8 +1,10 @@
-using System;
 using UnityEngine;
 
 public class Gun : MonoBehaviour
 {
+    public bool Available { private set; get; }
+    public string Name { private set; get; }
+
     [SerializeField] private GunInfoSO _gunInfo;
     [SerializeField] private Transform _shotPoint;
 
@@ -29,5 +31,11 @@ public class Gun : MonoBehaviour
             else
                 Instantiate(_gunInfo.Missed, raycastHit.point, hitEffectRotation);
         }
+    }
+
+    private void Awake()
+    {
+        Available = _gunInfo.AvailableFromStart;
+        Name = _gunInfo.Name;
     }
 }

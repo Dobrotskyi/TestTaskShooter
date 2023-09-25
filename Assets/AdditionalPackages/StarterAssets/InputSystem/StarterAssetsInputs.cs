@@ -14,6 +14,7 @@ namespace StarterAssets
         public bool sprint;
         public bool aim;
         public bool shoot;
+        public int selectedWeaponIndex;
 
         [Header("Movement Settings")]
         public bool analogMovement;
@@ -39,6 +40,21 @@ namespace StarterAssets
         public void OnJump(InputValue value)
         {
             JumpInput(value.isPressed);
+        }
+
+        public void OnGetFirstWeapon(InputValue value)
+        {
+            SetSelectedWeapon(0);
+        }
+
+        public void OnGetSecondWeapon(InputValue value)
+        {
+            SetSelectedWeapon(1);
+        }
+
+        public void OnGetThirdWeapon(InputValue value)
+        {
+            SetSelectedWeapon(2);
         }
 
         public void OnSprint(InputValue value)
@@ -86,6 +102,11 @@ namespace StarterAssets
         public void ShootInput(bool newShootState)
         {
             shoot = newShootState;
+        }
+
+        public void SetSelectedWeapon(int index)
+        {
+            selectedWeaponIndex = index;
         }
 
         private void OnApplicationFocus(bool hasFocus)
