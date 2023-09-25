@@ -13,6 +13,8 @@ public class PlayerAiming : MonoBehaviour
     [SerializeField] private ParticleSystem _enemyHitMarker;
     [SerializeField] private ParticleSystem _missedHitMarker;
 
+    [SerializeField] private Gun _gun;
+
     private StarterAssetsInputs _inputs;
 
     private void Awake()
@@ -24,14 +26,12 @@ public class PlayerAiming : MonoBehaviour
     {
         Vector3 mouseAimWorldPos = Vector3.zero;
         Ray ray = Camera.main.ScreenPointToRay(new Vector2(Screen.width / 2, Screen.height / 2));
-        Transform hitTransform = null;
         if (Physics.Raycast(ray, out RaycastHit rayHit, 999f, _aimColliderMask))
         {
 #if UNITY_EDITOR
             _debugTransform.position = rayHit.point;
 #endif
             mouseAimWorldPos = rayHit.point;
-            hitTransform = rayHit.transform;
         }
 
         if (_inputs.aim)
@@ -44,18 +44,7 @@ public class PlayerAiming : MonoBehaviour
             transform.forward = Vector3.Lerp(transform.forward, aimDirection, 20f * Time.deltaTime);
 
             if (_inputs.shoot)
-            {
-                if (hitTransform != null)
-                {
-                    Quaternion hitEffectRotation = Quaternion.LookRotation(transform.position - rayHit.point);
-
-                    if (hitTransform.CompareTag("Enemy"))
-                        Instantiate(_enemyHitMarker, rayHit.point, hitEffectRotation);
-                    else
-                        Instantiate(_missedHitMarker, rayHit.point, hitEffectRotation);
-                }
-                _inputs.shoot = false;
-            }
+                _gun.Shoot();
         }
         else
             _viewToggle.EnableThirdPersonView();
