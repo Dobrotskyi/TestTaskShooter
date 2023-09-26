@@ -12,7 +12,7 @@ public class EnemyPerseption : MonoBehaviour
     }
 
     public State EnemyState { private set; get; } = State.Patroling;
-    public bool TargetIsBehind { private set; get; }
+    public bool TargetIsBehind { private set; get; } = true;
 
     [SerializeField] private LayerMask _playerLayer;
     [SerializeField] private float _sightRange, _attackRange;
@@ -23,7 +23,7 @@ public class EnemyPerseption : MonoBehaviour
 
     private void Awake()
     {
-        Target = GameObject.FindWithTag("Player").transform;
+        Target = GameObject.FindWithTag("Player").transform.Find("EnemyAimPoint");
     }
 
     private void Update()
@@ -35,7 +35,7 @@ public class EnemyPerseption : MonoBehaviour
         else if (_playerIsInSight && !_playerInAttackRange) EnemyState = State.Chasing;
         else if (_playerIsInSight && _playerInAttackRange) EnemyState = State.Attacking;
 
-        if (EnemyState == State.Attacking)
+        if (EnemyState == State.Attacking || EnemyState == State.Chasing)
             CheckIfPlayerIsBehind();
     }
 

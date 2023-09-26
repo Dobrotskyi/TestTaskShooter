@@ -7,6 +7,8 @@ using UnityEngine.Animations.Rigging;
 [RequireComponent(typeof(NavMeshAgent))]
 public class EnemyBehavoiur : MonoBehaviour
 {
+    [SerializeField] private bool _applyGunAiming;
+
     [SerializeField] private Vector3 _anchorPoint;
     [SerializeField] private float _walkPointRange;
     [SerializeField] private LayerMask _ground;
@@ -49,9 +51,8 @@ public class EnemyBehavoiur : MonoBehaviour
 
     private void ApplyAimingRig()
     {
-        if (!_perseption.TargetIsBehind)
-            if (_aimRig.weight != 1f)
-                _aimRig.weight = Mathf.Lerp(_aimRig.weight, 1f, 20f * Time.deltaTime);
+        if (_aimRig.weight != 1f)
+            _aimRig.weight = Mathf.Lerp(_aimRig.weight, 1f, 20f * Time.deltaTime);
     }
 
     private void DisableAimingRig()
@@ -73,22 +74,27 @@ public class EnemyBehavoiur : MonoBehaviour
     private void ChaseTarget()
     {
         _animator.SetBool("Walk", true);
-        ApplyAimingRig();
+        if (_perseption.TargetIsBehind)
+            DisableAimingRig();
+        else
+            ApplyAimingRig();
         _agent.SetDestination(_perseption.Target.position);
     }
 
     private void Attack()
     {
         if (_perseption.TargetIsBehind)
+        {
             HandleEnemyRotation();
+            DisableAimingRig();
+        }
+        else
+            ApplyAimingRig();
         _animator.SetBool("Walk", false);
 
-        if (!_perseption.TargetIsBehind)
-            ApplyAimingRig();
-        else
-            DisableAimingRig();
-
         _agent.SetDestination(transform.position);
+        if (_applyGunAiming)
+            _gun.AimAt(_perseption.Target.position);
         _gun.Shoot();
         if (_gun.AmmoInMag <= 0)
             _gun.StartReloading();
