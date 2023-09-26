@@ -4,6 +4,9 @@ using UnityEngine.Animations.Rigging;
 
 public class Enemy : MonoBehaviour
 {
+    private const float _rotationThreashold = 60f;
+    private bool _rotateTowardsEnemy;
+
     [SerializeField] private LayerMask _ground, _playerLayer;
     [SerializeField] private float _sightRange, _attackRange;
     [SerializeField] private float _walkPointRange;
@@ -11,6 +14,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] private Gun _gun;
     [SerializeField] private Rig _aimRig;
 
+    private Animator _animator;
     private NavMeshAgent _agent;
     private Transform _player;
     private bool _playerIsInSight, _playerInAttackRange, _walkingPointSet;
@@ -20,6 +24,7 @@ public class Enemy : MonoBehaviour
     {
         _player = GameObject.FindWithTag("Player").transform;
         _agent = GetComponent<NavMeshAgent>();
+        _animator = GetComponent<Animator>();
     }
 
     private void Update()
@@ -34,6 +39,7 @@ public class Enemy : MonoBehaviour
 
     private void Patroling()
     {
+        _animator.SetBool("Walk", true);
         DisableAimingRig();
         if (!_walkingPointSet) GetWalkingPoint();
 
@@ -54,23 +60,50 @@ public class Enemy : MonoBehaviour
 
     private void Attack()
     {
-        ApplyAimingRig();
+        HandleEnemyRotation();
+        _animator.SetBool("Walk", false);
+
+        if (!PlayerIsBehind())
+            ApplyAimingRig();
+        else
+            DisableAimingRig();
 
         _agent.SetDestination(transform.position);
-
-        Vector3 chestAimDirection = _player.transform.position - transform.position;
-        chestAimDirection.y = 0f;
-        transform.forward = Vector3.Lerp(transform.forward,
-                                        chestAimDirection.normalized,
-                                        20f * Time.deltaTime);
-
         _gun.Shoot();
         if (_gun.AmmoInMag <= 0)
             _gun.StartReloading();
     }
 
+    private bool PlayerIsBehind()
+    {
+        Vector3 chestAimDirection = _player.transform.position - transform.position;
+        chestAimDirection.y = 0f;
+        float angleBetweenChestAndTarget = Vector3.Angle(chestAimDirection, transform.forward);
+
+        if (angleBetweenChestAndTarget > _rotationThreashold)
+            return true;
+        return false;
+    }
+
+    private void HandleEnemyRotation()
+    {
+        if (!PlayerIsBehind())
+            return;
+
+        _rotateTowardsEnemy = true;
+        Vector3 chestAimDirection = _player.transform.position - transform.position;
+        chestAimDirection.y = 0f;
+        if (_rotateTowardsEnemy)
+            transform.forward = Vector3.Lerp(transform.forward,
+                                            chestAimDirection.normalized,
+                                            20f * Time.deltaTime);
+        if (Vector3.Angle(chestAimDirection, transform.forward) <= 5f)
+            _rotateTowardsEnemy = false;
+    }
+
     private void ChasePlayer()
     {
+        _animator.SetBool("Walk", true);
         ApplyAimingRig();
         _agent.SetDestination(_player.position);
     }
