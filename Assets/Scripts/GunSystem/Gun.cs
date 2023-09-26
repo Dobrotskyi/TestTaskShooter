@@ -53,9 +53,11 @@ public class Gun : MonoBehaviour
         if (Physics.Raycast(ray, out RaycastHit raycastHit, 999f, _gunInfo.HitLayerMask))
         {
             Quaternion hitEffectRotation = Quaternion.LookRotation(_shotPoint.position - raycastHit.point);
-            if (raycastHit.transform.CompareTag("Enemy"))
+            if (raycastHit.transform.CompareTag("Enemy") || raycastHit.transform.CompareTag("Player"))
             {
                 Instantiate(_gunInfo.EnemyHit, raycastHit.point, hitEffectRotation);
+                if (raycastHit.transform.TryGetComponent<Health>(out Health health))
+                    health.TakeDamage(_gunInfo.Damage);
             }
             else
                 Instantiate(_gunInfo.Missed, raycastHit.point, hitEffectRotation);

@@ -68,7 +68,6 @@ public class EnemyPerseption : MonoBehaviour
 
         if (Physics.Raycast(ray, out RaycastHit raycastHit, 999f))
         {
-            Debug.Log(raycastHit.transform.tag);
             if (!raycastHit.transform.CompareTag("Player"))
                 return true;
         }

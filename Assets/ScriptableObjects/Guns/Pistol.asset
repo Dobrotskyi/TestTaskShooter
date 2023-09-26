@@ -21,7 +21,7 @@ MonoBehaviour:
   _spread: {x: 0, y: 0, z: 0}
   _hitLayerMask:
     serializedVersion: 2
-    m_Bits: 1
+    m_Bits: 9
   _enemyHit: {fileID: 5417406507287504946, guid: d2f4ecd60a9d97548a8140d5c7ae9aad,
     type: 3}
   _missed: {fileID: 5417406507287504946, guid: 27e54b4bb7b91c74baf83b0557aa0af9, type: 3}
