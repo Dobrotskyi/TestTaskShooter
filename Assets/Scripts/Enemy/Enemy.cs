@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Animations.Rigging;
 
 public class Enemy : MonoBehaviour
 {
@@ -8,6 +9,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] private float _walkPointRange;
     [SerializeField] private Vector3 _anchorPoint;
     [SerializeField] private Gun _gun;
+    [SerializeField] private Rig _aimRig;
 
     private NavMeshAgent _agent;
     private Transform _player;
@@ -32,6 +34,7 @@ public class Enemy : MonoBehaviour
 
     private void Patroling()
     {
+        DisableAimingRig();
         if (!_walkingPointSet) GetWalkingPoint();
 
         _agent.SetDestination(_walkPoint);
@@ -51,6 +54,8 @@ public class Enemy : MonoBehaviour
 
     private void Attack()
     {
+        ApplyAimingRig();
+
         _agent.SetDestination(transform.position);
 
         Vector3 chestAimDirection = _player.transform.position - transform.position;
@@ -58,7 +63,7 @@ public class Enemy : MonoBehaviour
         transform.forward = Vector3.Lerp(transform.forward,
                                         chestAimDirection.normalized,
                                         20f * Time.deltaTime);
-        _gun.AimAt(_player.transform.position);
+
         _gun.Shoot();
         if (_gun.AmmoInMag <= 0)
             _gun.StartReloading();
@@ -66,6 +71,19 @@ public class Enemy : MonoBehaviour
 
     private void ChasePlayer()
     {
+        ApplyAimingRig();
         _agent.SetDestination(_player.position);
+    }
+
+    private void ApplyAimingRig()
+    {
+        if (_aimRig.weight != 1f)
+            _aimRig.weight = Mathf.Lerp(_aimRig.weight, 1f, 20f * Time.deltaTime);
+    }
+
+    private void DisableAimingRig()
+    {
+        if (_aimRig.weight != 0)
+            _aimRig.weight = Mathf.Lerp(_aimRig.weight, 0f, 20f * Time.deltaTime);
     }
 }

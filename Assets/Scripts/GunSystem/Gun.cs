@@ -24,11 +24,12 @@ public class Gun : MonoBehaviour
     private IEnumerator Reloading()
     {
         IsReloading = true;
-        transform.localRotation = Quaternion.Euler(-90f, 0, 0);
+        Vector3 rotationEulers = transform.localRotation.eulerAngles;
+        transform.localRotation = Quaternion.Euler(rotationEulers.x - 90f, rotationEulers.y, rotationEulers.z);
         yield return new WaitForSeconds(_gunInfo.ReloadTime);
         IsReloading = false;
         AmmoInMag = _gunInfo.MagCapacity;
-        transform.localRotation = Quaternion.Euler(0, 0, 0);
+        transform.localRotation = Quaternion.Euler(rotationEulers);
     }
 
     public void AimAt(Vector3 position)

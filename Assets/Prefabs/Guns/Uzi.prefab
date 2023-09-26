@@ -43,7 +43,7 @@ GameObject:
   - component: {fileID: 5990486167588966730}
   - component: {fileID: 7533437442463849131}
   m_Layer: 0
-  m_Name: Uzi
+  m_Name: UziModel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -62,7 +62,7 @@ GameObject:
   - component: {fileID: 474810974376649101}
   - component: {fileID: 1548194448884304836}
   m_Layer: 6
-  m_Name: M16a4
+  m_Name: M16a4Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
