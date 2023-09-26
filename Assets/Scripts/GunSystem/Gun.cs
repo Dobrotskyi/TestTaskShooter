@@ -11,6 +11,7 @@ public class Gun : MonoBehaviour
 
     [SerializeField] private GunInfoSO _gunInfo;
     [SerializeField] private Transform _shotPoint;
+    [SerializeField] private ProjectileTrail _trailPrefab;
 
     private float _lastShotTime = 0;
 
@@ -50,6 +51,8 @@ public class Gun : MonoBehaviour
             }
             else
                 Instantiate(_gunInfo.Missed, raycastHit.point, hitEffectRotation);
+
+            Instantiate(_trailPrefab, _shotPoint.position, Quaternion.identity).Setup(raycastHit.point);
         }
         AmmoInMag--;
     }

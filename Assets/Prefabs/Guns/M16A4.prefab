@@ -48,6 +48,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _gunInfo: {fileID: 11400000, guid: 61fc9c02d025a2342bd1c25d39373d17, type: 2}
   _shotPoint: {fileID: 7089628654791004871}
+  _trailPrefab: {fileID: 4067597915690631565, guid: 5d42287f59bdf164391f931bb0a279d7,
+    type: 3}
 --- !u!1 &5745742673047880986
 GameObject:
   m_ObjectHideFlags: 0

@@ -162,3 +162,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _gunInfo: {fileID: 11400000, guid: 5c695fff369be8c4984f3342843c428f, type: 2}
   _shotPoint: {fileID: 3122085802007206164}
+  _trailPrefab: {fileID: 4067597915690631565, guid: 5d42287f59bdf164391f931bb0a279d7,
+    type: 3}
