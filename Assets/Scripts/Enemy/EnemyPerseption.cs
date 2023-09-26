@@ -13,13 +13,14 @@ public class EnemyPerseption : MonoBehaviour
 
     public State EnemyState { private set; get; } = State.Patroling;
     public bool TargetIsBehind { private set; get; } = true;
+    public Transform Target { private set; get; }
 
     [SerializeField] private LayerMask _playerLayer;
     [SerializeField] private float _sightRange, _attackRange;
+    [SerializeField] private Transform _eyeLevel;
 
     private bool _rotateTowardsEnemy;
     private bool _playerIsInSight, _playerInAttackRange, _walkingPointSet;
-    public Transform Target { private set; get; }
 
     private void Awake()
     {
@@ -33,10 +34,16 @@ public class EnemyPerseption : MonoBehaviour
 
         if (!_playerIsInSight && !_playerInAttackRange) EnemyState = State.Patroling;
         else if (_playerIsInSight && !_playerInAttackRange) EnemyState = State.Chasing;
-        else if (_playerIsInSight && _playerInAttackRange) EnemyState = State.Attacking;
+        else if (_playerIsInSight && _playerInAttackRange && !PlayerBehindObstacle()) EnemyState = State.Attacking;
 
         if (EnemyState == State.Attacking || EnemyState == State.Chasing)
             CheckIfPlayerIsBehind();
+
+        if (EnemyState == State.Attacking)
+        {
+            if (PlayerBehindObstacle())
+                EnemyState = State.Chasing;
+        }
     }
 
     private void CheckIfPlayerIsBehind()
@@ -53,5 +60,18 @@ public class EnemyPerseption : MonoBehaviour
                 return;
 
         TargetIsBehind = false;
+    }
+
+    private bool PlayerBehindObstacle()
+    {
+        Ray ray = new(_eyeLevel.position, (Target.position - _eyeLevel.position).normalized);
+
+        if (Physics.Raycast(ray, out RaycastHit raycastHit, 999f))
+        {
+            Debug.Log(raycastHit.transform.tag);
+            if (!raycastHit.transform.CompareTag("Player"))
+                return true;
+        }
+        return false;
     }
 }

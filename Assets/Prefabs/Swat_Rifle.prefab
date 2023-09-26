@@ -1975,6 +1975,7 @@ MonoBehaviour:
     m_Bits: 8
   _sightRange: 5
   _attackRange: 3
+  _eyeLevel: {fileID: 6108566812702778873}
 --- !u!114 &8846414698190853009
 MonoBehaviour:
   m_ObjectHideFlags: 0
