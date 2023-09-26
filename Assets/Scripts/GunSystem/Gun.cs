@@ -17,7 +17,7 @@ public class Gun : MonoBehaviour
 
     public void StartReloading()
     {
-        if (!IsReloading)
+        if (!IsReloading && gameObject.activeSelf)
             StartCoroutine(Reloading());
     }
 

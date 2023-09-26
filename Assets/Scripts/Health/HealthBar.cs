@@ -4,8 +4,10 @@ using UnityEngine.UI;
 public class HealthBar : MonoBehaviour
 {
     [SerializeField] private GameObject _fillArea;
+    [SerializeField] private bool _playerHealthBar;
+    [SerializeField] private Health _health;
+
     private Slider _slider;
-    private Health _health;
 
     private void UpdateBar(float percentage)
     {
@@ -17,7 +19,8 @@ public class HealthBar : MonoBehaviour
     private void Awake()
     {
         _slider = GetComponent<Slider>();
-        _health = GameObject.FindWithTag("Player").GetComponent<Health>();
+        if (_playerHealthBar)
+            _health = GameObject.FindWithTag("Player").GetComponent<Health>();
         _health.ValueChanged += UpdateBar;
     }
 
