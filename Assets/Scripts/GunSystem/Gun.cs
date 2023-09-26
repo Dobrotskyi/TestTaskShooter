@@ -31,6 +31,13 @@ public class Gun : MonoBehaviour
         transform.localRotation = Quaternion.Euler(0, 0, 0);
     }
 
+    public void AimAt(Vector3 position)
+    {
+        if (IsReloading)
+            return;
+        transform.forward = (position - transform.position).normalized;
+    }
+
     public void Shoot()
     {
         if (_lastShotTime + _gunInfo.FireRate > Time.time || AmmoInMag <= 0 || IsReloading)

@@ -1,5 +1,6 @@
 using StarterAssets;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class PlayerAiming : MonoBehaviour
 {
@@ -9,9 +10,7 @@ public class PlayerAiming : MonoBehaviour
 
     [SerializeField] private CameraViewToggle _viewToggle;
     [SerializeField] private LayerMask _aimColliderMask;
-
-    [SerializeField] private ParticleSystem _enemyHitMarker;
-    [SerializeField] private ParticleSystem _missedHitMarker;
+    [SerializeField] private Transform _hand;
 
     private GunController _gunController;
     private StarterAssetsInputs _inputs;
@@ -40,13 +39,18 @@ public class PlayerAiming : MonoBehaviour
         {
             _viewToggle.EnableFirstPersonView();
 
-            Vector3 worldAimTarget = mouseAimWorldPos;
-            worldAimTarget.y = transform.position.y;
-            Vector3 aimDirection = (worldAimTarget - transform.position).normalized;
-            transform.forward = Vector3.Lerp(transform.forward, aimDirection, 20f * Time.deltaTime);
+            Vector3 playerChestAimAt = mouseAimWorldPos;
+            playerChestAimAt.y = transform.position.y;
+            Vector3 chestAimDirection = (playerChestAimAt - transform.position).normalized;
+            transform.forward = Vector3.Lerp(transform.forward, chestAimDirection, 20f * Time.deltaTime);
 
             _animator.SetLayerWeight(1, Mathf.Lerp(_animator.GetLayerWeight(1), 1f, Time.deltaTime * 10f));
 
+
+            Quaternion handAimRotation = Quaternion.LookRotation((mouseAimWorldPos - _hand.position).normalized);
+            _hand.rotation = Quaternion.Euler(handAimRotation.eulerAngles.x, _hand.eulerAngles.y, _hand.eulerAngles.z);
+
+            _gunController.SelectedGun.AimAt(mouseAimWorldPos);
             if (_inputs.shoot)
                 _gunController.SelectedGun.Shoot();
         }
