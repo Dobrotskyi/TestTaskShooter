@@ -52,6 +52,12 @@ public class Enemy : MonoBehaviour
     private void Attack()
     {
         _agent.SetDestination(transform.position);
+
+        Vector3 chestAimDirection = _player.transform.position - transform.position;
+        chestAimDirection.y = 0f;
+        transform.forward = Vector3.Lerp(transform.forward,
+                                        chestAimDirection.normalized,
+                                        20f * Time.deltaTime);
         _gun.AimAt(_player.transform.position);
         _gun.Shoot();
         if (_gun.AmmoInMag <= 0)
