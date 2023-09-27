@@ -43,9 +43,6 @@ public class PlayerAiming : MonoBehaviour
             Vector3 chestAimDirection = (playerChestAimAt - transform.position).normalized;
             transform.forward = Vector3.Lerp(transform.forward, chestAimDirection, 20f * Time.deltaTime);
 
-            _animator.SetLayerWeight(1, Mathf.Lerp(_animator.GetLayerWeight(1), 1f, Time.deltaTime * 10f));
-
-
             Quaternion handAimRotation = Quaternion.LookRotation((mouseAimWorldPos - _hand.position).normalized);
             _hand.rotation = Quaternion.Euler(handAimRotation.eulerAngles.x, _hand.eulerAngles.y, _hand.eulerAngles.z);
 
@@ -56,7 +53,6 @@ public class PlayerAiming : MonoBehaviour
         else
         {
             _viewToggle.EnableThirdPersonView();
-            _animator.SetLayerWeight(1, Mathf.Lerp(_animator.GetLayerWeight(1), 0f, Time.deltaTime * 10f));
         }
     }
 }

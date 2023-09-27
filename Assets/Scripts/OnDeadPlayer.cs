@@ -23,9 +23,11 @@ public class OnDeadPlayer : MonoBehaviour
     {
         _animator.SetBool("Dead", true);
         PlayerInput input = GetComponent<PlayerInput>();
+        GetComponent<StarterAssetsInputs>().aim = false;
         input.actions = null;
         input.enabled = false;
         GetComponent<ThirdPersonController>().enabled = false;
         GetComponent<Collider>().enabled = false;
+        GetComponent<PlayerAiming>().enabled = false;
     }
 }

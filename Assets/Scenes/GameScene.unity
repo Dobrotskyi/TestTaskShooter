@@ -23141,6 +23141,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7762757856637905992, guid: 9679de1316ef7c74b85ed02a30afe2d3,
+        type: 3}
+      propertyPath: _1stPersonCamera
+      value: 
+      objectReference: {fileID: 1998204833}
+    - target: {fileID: 7762757856637905992, guid: 9679de1316ef7c74b85ed02a30afe2d3,
+        type: 3}
+      propertyPath: _3rdPersonCamera
+      value: 
+      objectReference: {fileID: 1114257422}
     - target: {fileID: 8100049112492142775, guid: 9679de1316ef7c74b85ed02a30afe2d3,
         type: 3}
       propertyPath: _max
@@ -27565,9 +27575,9 @@ SceneRoots:
   - {fileID: 1527712159}
   - {fileID: 1221041499}
   - {fileID: 1402827283}
+  - {fileID: 926506354}
   - {fileID: 6342207166018542376}
   - {fileID: 746329221}
-  - {fileID: 926506354}
   - {fileID: 3357650709315212179}
   - {fileID: 864678861}
   - {fileID: 8822810624109301148}
