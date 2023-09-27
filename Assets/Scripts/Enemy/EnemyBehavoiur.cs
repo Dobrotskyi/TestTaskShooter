@@ -17,6 +17,7 @@ public class EnemyBehavoiur : MonoBehaviour
     [SerializeField] private LayerMask _ground;
     [SerializeField] private Rig _aimRig;
     [SerializeField] private Gun _gun;
+    [SerializeField] private CollectableAmmo _dropableItem;
 
     private Health _health;
     private EnemyPerseption _perseption;
@@ -46,6 +47,8 @@ public class EnemyBehavoiur : MonoBehaviour
         System.Random random = new();
         _aimRig.weight = 0;
         _animator.SetInteger("Death", random.Next(0, DEATH_ANIM_AMT));
+
+        Instantiate(_dropableItem, transform.position + Vector3.up / 2, Quaternion.identity);
         this.enabled = false;
     }
 

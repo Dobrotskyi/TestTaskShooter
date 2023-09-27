@@ -7,7 +7,7 @@ public class Gun : MonoBehaviour
     public bool IsReloading { private set; get; }
 
     public string Name { private set; get; }
-    public int AmmoInMag { private set; get; }
+    public int AmmoInMag { private set; get; } = 0;
 
     [SerializeField] private GunInfoSO _gunInfo;
     [SerializeField] private Transform _shotPoint;
@@ -100,7 +100,8 @@ public class Gun : MonoBehaviour
     {
         Available = _gunInfo.AvailableFromStart;
         Name = _gunInfo.Name;
-        AmmoInMag = _gunInfo.MagCapacity;
+        if (Available)
+            AmmoInMag = _gunInfo.MagCapacity;
     }
 
     private void OnDisable()

@@ -907,6 +907,8 @@ MonoBehaviour:
     m_Bits: 1
   _aimRig: {fileID: 969950263871738654}
   _gun: {fileID: 7207572875379466768}
+  _dropableItem: {fileID: 8257215831066472569, guid: ea7ab54d7bae6434b9fe52ab94fbcf92,
+    type: 3}
 --- !u!114 &5884268603091805823
 MonoBehaviour:
   m_ObjectHideFlags: 0

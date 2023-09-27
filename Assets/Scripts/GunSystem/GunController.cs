@@ -1,9 +1,14 @@
 using StarterAssets;
+using System;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public class GunController : MonoBehaviour
 {
+    public event Action<int, GunInfo> GunWasReloaded;
+    public event Action<List<GunInfo>> SendGunInfos;
+
     private const int MAX_WEAPONS_AMT = 3;
 
     [SerializeField] private Gun[] _guns = new Gun[3];
@@ -26,6 +31,11 @@ public class GunController : MonoBehaviour
 
         _input = GetComponent<StarterAssetsInputs>();
         DisableAllWeapons();
+
+        List<GunInfo> gunInfos = new();
+        for (int i = 0; i < _guns.Length; i++)
+            gunInfos.Add(new(_guns[i].Name, _guns[i].AmmoInMag, _additionalAmmo[_guns[i]]));
+        SendGunInfos?.Invoke(gunInfos);
     }
 
     private void Update()
@@ -33,6 +43,14 @@ public class GunController : MonoBehaviour
         CheckReloading();
         CheckIfChangeWeapon();
         ShowSelectedWeaponIfAiming();
+    }
+
+    private void FixedUpdate()
+    {
+        List<GunInfo> gunInfos = new();
+        for (int i = 0; i < _guns.Length; i++)
+            gunInfos.Add(new(_guns[i].Name, _guns[i].AmmoInMag, _additionalAmmo[_guns[i]]));
+        SendGunInfos?.Invoke(gunInfos);
     }
 
     private void CheckReloading()
@@ -44,6 +62,9 @@ public class GunController : MonoBehaviour
             {
                 SelectedGun.StartReloading(ref amt);
                 _additionalAmmo[SelectedGun] = amt;
+                GunWasReloaded?.Invoke(_selectedWeaponIndex, new(SelectedGun.Name,
+                                                                 SelectedGun.AmmoInMag,
+                                                                 amt));
             }
             _input.startReloading = false;
         }
