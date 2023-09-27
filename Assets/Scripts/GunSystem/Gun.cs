@@ -66,11 +66,10 @@ public class Gun : MonoBehaviour
     private IEnumerator ReloadingFirstPerson()
     {
         IsReloading = true;
-        Vector3 rotationEulers = transform.localRotation.eulerAngles;
-        transform.localRotation = Quaternion.Euler(rotationEulers.x - 90f, rotationEulers.y, rotationEulers.z);
+        transform.localRotation = Quaternion.Euler(-90f, 0, 0);
         yield return new WaitForSeconds(_gunInfo.ReloadTime);
         IsReloading = false;
-        transform.localRotation = Quaternion.Euler(rotationEulers);
+        transform.localRotation = Quaternion.identity;
     }
 
     public void AimAt(Vector3 position)
