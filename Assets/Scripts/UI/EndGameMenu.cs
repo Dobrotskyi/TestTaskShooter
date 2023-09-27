@@ -8,6 +8,8 @@ using UnityEngine.SceneManagement;
 public class EndGameMenu : MonoBehaviour
 {
     public static event Action GameHasEnded;
+    public static event Action PlayerWon;
+
     private enum Status
     {
         Won,
@@ -57,6 +59,7 @@ public class EndGameMenu : MonoBehaviour
         if (_enemiesKilled == _enemies.Count)
         {
             _status = Status.Won;
+            PlayerWon?.Invoke();
             ShowGameOverScreen();
         }
     }

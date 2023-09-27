@@ -1804,17 +1804,22 @@ PrefabInstance:
     - target: {fileID: 6275647757088117460, guid: bbd557fe696e93849b9ec8a22d7ffc49,
         type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6275647757088117460, guid: bbd557fe696e93849b9ec8a22d7ffc49,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8584889526628264956, guid: bbd557fe696e93849b9ec8a22d7ffc49,
         type: 3}
       propertyPath: m_Name
       value: SwatSmallWeapon (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8584889526628264956, guid: bbd557fe696e93849b9ec8a22d7ffc49,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1837,12 +1842,12 @@ PrefabInstance:
     - target: {fileID: 1851044667499039351, guid: 68067be8170b4ea47909d47e8352de7f,
         type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1851044667499039351, guid: 68067be8170b4ea47909d47e8352de7f,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2534176955051345104, guid: 68067be8170b4ea47909d47e8352de7f,
         type: 3}
@@ -1853,6 +1858,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Swat_Rifle (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2848323131085201351, guid: 68067be8170b4ea47909d47e8352de7f,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4808268963290824593, guid: 68067be8170b4ea47909d47e8352de7f,
         type: 3}
@@ -2881,17 +2891,22 @@ PrefabInstance:
     - target: {fileID: 6275647757088117460, guid: bbd557fe696e93849b9ec8a22d7ffc49,
         type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6275647757088117460, guid: bbd557fe696e93849b9ec8a22d7ffc49,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8584889526628264956, guid: bbd557fe696e93849b9ec8a22d7ffc49,
         type: 3}
       propertyPath: m_Name
       value: SwatSmallWeapon (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8584889526628264956, guid: bbd557fe696e93849b9ec8a22d7ffc49,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3224,12 +3239,12 @@ PrefabInstance:
     - target: {fileID: 1851044667499039351, guid: 68067be8170b4ea47909d47e8352de7f,
         type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1851044667499039351, guid: 68067be8170b4ea47909d47e8352de7f,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2534176955051345104, guid: 68067be8170b4ea47909d47e8352de7f,
         type: 3}
@@ -3240,6 +3255,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Swat_Rifle (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2848323131085201351, guid: 68067be8170b4ea47909d47e8352de7f,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4808268963290824593, guid: 68067be8170b4ea47909d47e8352de7f,
         type: 3}
@@ -4442,17 +4462,22 @@ PrefabInstance:
     - target: {fileID: 6275647757088117460, guid: bbd557fe696e93849b9ec8a22d7ffc49,
         type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6275647757088117460, guid: bbd557fe696e93849b9ec8a22d7ffc49,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8584889526628264956, guid: bbd557fe696e93849b9ec8a22d7ffc49,
         type: 3}
       propertyPath: m_Name
       value: SwatSmallWeapon (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8584889526628264956, guid: bbd557fe696e93849b9ec8a22d7ffc49,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -4651,17 +4676,22 @@ PrefabInstance:
     - target: {fileID: 6275647757088117460, guid: bbd557fe696e93849b9ec8a22d7ffc49,
         type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6275647757088117460, guid: bbd557fe696e93849b9ec8a22d7ffc49,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8584889526628264956, guid: bbd557fe696e93849b9ec8a22d7ffc49,
         type: 3}
       propertyPath: m_Name
       value: SwatSmallWeapon (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8584889526628264956, guid: bbd557fe696e93849b9ec8a22d7ffc49,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -20667,12 +20697,12 @@ PrefabInstance:
     - target: {fileID: 1851044667499039351, guid: 68067be8170b4ea47909d47e8352de7f,
         type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1851044667499039351, guid: 68067be8170b4ea47909d47e8352de7f,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2534176955051345104, guid: 68067be8170b4ea47909d47e8352de7f,
         type: 3}
@@ -20683,6 +20713,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Swat_Rifle
+      objectReference: {fileID: 0}
+    - target: {fileID: 2848323131085201351, guid: 68067be8170b4ea47909d47e8352de7f,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4808268963290824593, guid: 68067be8170b4ea47909d47e8352de7f,
         type: 3}
