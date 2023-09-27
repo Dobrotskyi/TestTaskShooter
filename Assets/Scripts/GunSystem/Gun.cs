@@ -15,10 +15,40 @@ public class Gun : MonoBehaviour
 
     private float _lastShotTime = 0;
 
+    public void SetAvaliable(bool avaliable) => Available = avaliable;
+
     public void StartReloading()
     {
         if (!IsReloading && gameObject.activeSelf)
+        {
             StartCoroutine(Reloading());
+            AmmoInMag = _gunInfo.MagCapacity;
+        }
+    }
+
+    public void StartReloading(ref int ammoAmt)
+    {
+        if (IsReloading || !gameObject.activeSelf)
+            return;
+
+        if (ammoAmt == -1)
+            AmmoInMag = _gunInfo.MagCapacity;
+        else
+        {
+            ammoAmt += AmmoInMag;
+            if (ammoAmt < _gunInfo.MagCapacity)
+            {
+                AmmoInMag = ammoAmt;
+                ammoAmt = 0;
+            }
+            else
+            {
+                AmmoInMag = _gunInfo.MagCapacity;
+                ammoAmt -= _gunInfo.MagCapacity;
+            }
+        }
+
+        StartCoroutine(Reloading());
     }
 
     private IEnumerator Reloading()
@@ -28,7 +58,6 @@ public class Gun : MonoBehaviour
         transform.localRotation = Quaternion.Euler(rotationEulers.x - 90f, rotationEulers.y, rotationEulers.z);
         yield return new WaitForSeconds(_gunInfo.ReloadTime);
         IsReloading = false;
-        AmmoInMag = _gunInfo.MagCapacity;
         transform.localRotation = Quaternion.Euler(rotationEulers);
     }
 

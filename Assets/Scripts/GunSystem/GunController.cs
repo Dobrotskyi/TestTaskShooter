@@ -1,4 +1,5 @@
 using StarterAssets;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class GunController : MonoBehaviour
@@ -6,6 +7,8 @@ public class GunController : MonoBehaviour
     private const int MAX_WEAPONS_AMT = 3;
 
     [SerializeField] private Gun[] _guns = new Gun[3];
+
+    private Dictionary<Gun, int> _additionalAmmo = new();
     private StarterAssetsInputs _input;
     private int _selectedWeaponIndex = 0;
 
@@ -13,6 +16,14 @@ public class GunController : MonoBehaviour
 
     private void Awake()
     {
+        for (int i = 0; i < _guns.Length; i++)
+        {
+            if (_guns[i].Available)
+                _additionalAmmo[_guns[i]] = -1;
+            else
+                _additionalAmmo[_guns[i]] = 0;
+        }
+
         _input = GetComponent<StarterAssetsInputs>();
         DisableAllWeapons();
     }
@@ -28,23 +39,36 @@ public class GunController : MonoBehaviour
     {
         if (_input.startReloading)
         {
-            _guns[_selectedWeaponIndex].StartReloading();
+            int amt = _additionalAmmo[SelectedGun];
+            if (amt != 0)
+            {
+                SelectedGun.StartReloading(ref amt);
+                _additionalAmmo[SelectedGun] = amt;
+            }
             _input.startReloading = false;
         }
     }
 
     private void CheckIfChangeWeapon()
     {
+        if (SelectedGun.AmmoInMag + _additionalAmmo[SelectedGun] == 0)
+        {
+            SelectedGun.SetAvaliable(false);
+            _selectedWeaponIndex = 0;
+        }
+
         if (_input.selectedWeaponIndex != _selectedWeaponIndex)
         {
             if (!_guns[_input.selectedWeaponIndex].Available)
                 _input.selectedWeaponIndex = _selectedWeaponIndex;
             else
-            {
                 _selectedWeaponIndex = _input.selectedWeaponIndex;
-                DisableAllWeapons();
-                _guns[_selectedWeaponIndex].gameObject.SetActive(true);
-            }
+        }
+
+        if (!SelectedGun.gameObject.activeSelf)
+        {
+            DisableAllWeapons();
+            SelectedGun.gameObject.SetActive(true);
         }
     }
 
@@ -61,5 +85,16 @@ public class GunController : MonoBehaviour
     private void DisableAllWeapons()
     {
         foreach (var weapon in _guns) weapon.gameObject.SetActive(false);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.TryGetComponent<CollectableAmmo>(out CollectableAmmo collectableAmmo))
+        {
+            int gunIndex = (int)collectableAmmo.Type;
+            _additionalAmmo[_guns[gunIndex]] += collectableAmmo.DroppedAmmoAmt;
+            _guns[gunIndex].SetAvaliable(true);
+            Destroy(collectableAmmo.gameObject);
+        }
     }
 }

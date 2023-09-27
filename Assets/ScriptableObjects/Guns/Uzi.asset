@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb6defa40bfed994c92bb533b6ec9c22, type: 3}
   m_Name: Uzi
   m_EditorClassIdentifier: 
-  _availableFromStart: 1
+  _availableFromStart: 0
   _name: Uzi
   _magCapacity: 20
   _reloadTime: 2
