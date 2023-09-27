@@ -18,6 +18,9 @@ public class EndGameMenu : MonoBehaviour
     private Status _status;
 
     [SerializeField] private TextMeshProUGUI _title;
+    [SerializeField] private TextMeshProUGUI _winAmt;
+    [SerializeField] private TextMeshProUGUI _lossAmt;
+
     [SerializeField] private GameObject _body;
 
     private List<Health> _enemies = new();
@@ -77,10 +80,19 @@ public class EndGameMenu : MonoBehaviour
 
         string title = "";
         if (_status == Status.Lost)
+        {
             title = "YOU LOST!";
+            PlayerWinLossTracker.AddLoss();
+        }
         else
             if (_status == Status.Won)
-            title = "YOU WIN!";
+        {
+            title = "YOU WON!";
+            PlayerWinLossTracker.AddWin();
+        }
+
+        _winAmt.text = PlayerWinLossTracker.GetPlayerWins().ToString();
+        _lossAmt.text = PlayerWinLossTracker.GetPlayerLosses().ToString();
 
         _title.text = title;
         _body.SetActive(true);
