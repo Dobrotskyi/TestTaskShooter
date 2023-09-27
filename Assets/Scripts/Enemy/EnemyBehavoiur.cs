@@ -5,8 +5,11 @@ using UnityEngine.Animations.Rigging;
 [RequireComponent(typeof(EnemyPerseption))]
 [RequireComponent(typeof(Animator))]
 [RequireComponent(typeof(NavMeshAgent))]
+[RequireComponent(typeof(Health))]
 public class EnemyBehavoiur : MonoBehaviour
 {
+    private const int DEATH_ANIM_AMT = 3;
+
     [SerializeField] private bool _applyGunAiming;
 
     [SerializeField] private Vector3 _anchorPoint;
@@ -15,6 +18,7 @@ public class EnemyBehavoiur : MonoBehaviour
     [SerializeField] private Rig _aimRig;
     [SerializeField] private Gun _gun;
 
+    private Health _health;
     private EnemyPerseption _perseption;
     private Animator _animator;
     private NavMeshAgent _agent;
@@ -26,6 +30,23 @@ public class EnemyBehavoiur : MonoBehaviour
         _perseption = GetComponent<EnemyPerseption>();
         _animator = GetComponent<Animator>();
         _agent = GetComponent<NavMeshAgent>();
+        _health = GetComponent<Health>();
+        _health.ZeroHealth += OnDead;
+    }
+
+    private void OnDestroy()
+    {
+        _health.ZeroHealth -= OnDead;
+    }
+
+    private void OnDead()
+    {
+        GetComponent<Collider>().enabled = false;
+        _agent.isStopped = true;
+        System.Random random = new();
+        _aimRig.weight = 0;
+        _animator.SetInteger("Death", random.Next(0, DEATH_ANIM_AMT));
+        this.enabled = false;
     }
 
     private void FixedUpdate()

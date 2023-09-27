@@ -3,7 +3,7 @@ using UnityEngine.Animations.Rigging;
 
 public class EnemyPerseption : MonoBehaviour
 {
-    private const float _rotationThreashold = 60f;
+    private const float ROTATION_THREASHOLD = 60f;
 
     public enum State
     {
@@ -53,7 +53,7 @@ public class EnemyPerseption : MonoBehaviour
         chestAimDirection.y = 0f;
         float angleBetweenChestAndTarget = Vector3.Angle(chestAimDirection, transform.forward);
 
-        if (angleBetweenChestAndTarget > _rotationThreashold)
+        if (angleBetweenChestAndTarget > ROTATION_THREASHOLD)
             TargetIsBehind = true;
 
         if (TargetIsBehind)

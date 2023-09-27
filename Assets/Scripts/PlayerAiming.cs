@@ -1,6 +1,5 @@
 using StarterAssets;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 public class PlayerAiming : MonoBehaviour
 {

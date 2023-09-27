@@ -319,6 +319,7 @@ MonoBehaviour:
   _fillArea: {fileID: 2502795275578505040}
   _playerHealthBar: 1
   _health: {fileID: 0}
+  _slider: {fileID: 1048865259811314315}
 --- !u!1 &7485938475502781882
 GameObject:
   m_ObjectHideFlags: 0
