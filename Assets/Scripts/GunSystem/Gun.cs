@@ -17,7 +17,12 @@ public class Gun : MonoBehaviour
 
     public void SetAvaliable(bool avaliable) => Available = avaliable;
 
-    public void StartReloading()
+    public void InstantReload()
+    {
+        AmmoInMag = _gunInfo.MagCapacity;
+    }
+
+    public void StartReloadingBot()
     {
         if (!IsReloading && gameObject.activeSelf)
         {
@@ -48,10 +53,17 @@ public class Gun : MonoBehaviour
             }
         }
 
-        StartCoroutine(Reloading());
+        StartCoroutine(ReloadingFirstPerson());
     }
 
     private IEnumerator Reloading()
+    {
+        IsReloading = true;
+        yield return new WaitForSeconds(_gunInfo.ReloadTime);
+        IsReloading = false;
+    }
+
+    private IEnumerator ReloadingFirstPerson()
     {
         IsReloading = true;
         Vector3 rotationEulers = transform.localRotation.eulerAngles;
@@ -112,6 +124,6 @@ public class Gun : MonoBehaviour
     private void OnEnable()
     {
         if (IsReloading)
-            StartCoroutine(Reloading());
+            StartCoroutine(ReloadingFirstPerson());
     }
 }

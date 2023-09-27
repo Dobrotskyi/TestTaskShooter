@@ -15,7 +15,7 @@ MonoBehaviour:
   _availableFromStart: 0
   _name: M16a4
   _magCapacity: 30
-  _reloadTime: 3
+  _reloadTime: 2.5
   _fireRate: 0.25
   _damage: 40
   _spread: {x: 0, y: 0, z: 0}

@@ -19,6 +19,8 @@ public class EnemyBehavoiur : MonoBehaviour
     [SerializeField] private Gun _gun;
     [SerializeField] private CollectableAmmo _dropableItem;
 
+    [SerializeField] private TwoBoneIKConstraint _grabHand;
+
     private Health _health;
     private EnemyPerseption _perseption;
     private Animator _animator;
@@ -33,6 +35,7 @@ public class EnemyBehavoiur : MonoBehaviour
         _agent = GetComponent<NavMeshAgent>();
         _health = GetComponent<Health>();
         _health.ZeroHealth += OnDead;
+        _gun.InstantReload();
     }
 
     private void OnDestroy()
@@ -60,6 +63,19 @@ public class EnemyBehavoiur : MonoBehaviour
             ChaseTarget();
         else if (_perseption.EnemyState == EnemyPerseption.State.Attacking)
             Attack();
+
+        if (_gun.IsReloading)
+        {
+            _aimRig.weight = 0;
+            if (_grabHand != null)
+                _grabHand.weight = 0;
+        }
+        else
+            if (_grabHand != null && _grabHand.weight != 1)
+            _grabHand.weight = 1;
+
+
+        _animator.SetBool("Reloading", _gun.IsReloading);
     }
 
     private void Patroling()
@@ -121,7 +137,7 @@ public class EnemyBehavoiur : MonoBehaviour
             _gun.AimAt(_perseption.Target.position);
         _gun.Shoot();
         if (_gun.AmmoInMag <= 0)
-            _gun.StartReloading();
+            _gun.StartReloadingBot();
     }
 
     private void HandleEnemyRotation()
