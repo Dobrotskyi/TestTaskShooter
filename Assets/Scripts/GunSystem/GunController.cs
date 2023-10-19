@@ -71,7 +71,7 @@ public class GunController : MonoBehaviour
 
     private void CheckIfChangeWeapon()
     {
-        if (SelectedGun.AmmoInMag + _additionalAmmo[SelectedGun] == 0)
+        if (_additionalAmmo[SelectedGun] != -1 && (SelectedGun.AmmoInMag + _additionalAmmo[SelectedGun] == 0))
         {
             SelectedGun.SetAvaliable(false);
             _selectedWeaponIndex = 0;
