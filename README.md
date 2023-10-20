@@ -3,6 +3,8 @@ This project was built as a test task.
 
 Simple shooter with animation rigging and 3 types of weapon
 
+You can find some videos of me playing this game here: https://youtu.be/zf-NVivxMVc  
+
 # Here are some screenshots.
 ![image](https://github.com/Dobrotskyi/TestTaskShooter/assets/118120050/b6d56d34-808b-467a-936a-66642d209ee9)
 ![image](https://github.com/Dobrotskyi/TestTaskShooter/assets/118120050/06e8cab9-636e-4538-ac13-49572e87fac4)
